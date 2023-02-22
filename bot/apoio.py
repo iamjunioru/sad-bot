@@ -22,6 +22,15 @@ def random_phrase():
     final_phrase = random.choice(p1)
     return final_phrase
 
+def random_response():
+    p1 = ['tá tudo bem?',
+          'como você tá se sentindo?',
+          'tô aqui para conversar se você quiser.',
+          'relaxa, as coisas vão melhorar.']
+        
+    final_phrase = random.choice(p1)
+    return final_phrase
+
 #
 keyword = 'suicidio'
 interval = 259200  # intervalo em segundos entre as respostas (3 dias)
@@ -49,9 +58,10 @@ while True:
                 continue
             # responde ao tweet a cada 3 dias
             if count == 0:
-                api.update_status('@' + tweet.user.screen_name + ' tá tudo bem?', in_reply_to_status_id=tweet.id)
+                response = random_response()
+                api.update_status('@' + tweet.user.screen_name + ' ' + response, in_reply_to_status_id=tweet.id)
                 print('---------------------------------------------------------')
-                print(f'o tweet de {tweet.user.screen_name} foi respondido')
+                print(f'o tweet de {tweet.user.screen_name} foi respondido com a frase "{response}"')
                 print('---------------------------------------------------------')
                 count += 1
 
